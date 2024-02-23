@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.PathVariable;
  * of the service that we would want to call in here.
  * --> LookUp application.properties in currency-exchange-service
  */
-@FeignClient(name = "currency-exchange", url = "http://localhost:8001")
+//@FeignClient(name = "currency-exchange", url = "http://localhost:8001")
+//client-side Loadbalancing inkl. Kommunikation mit dem Eureka Server über den FeignClient und Eureka client out of the box
+@FeignClient(name = "currency-exchange")
 public interface CurrencyConversionProxy {
 
     @GetMapping("/currency-exchange/from/{from}/to/{to}")
