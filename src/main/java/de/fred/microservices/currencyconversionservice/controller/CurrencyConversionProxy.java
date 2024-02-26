@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
  */
 //@FeignClient(name = "currency-exchange", url = "http://localhost:8001")
 //client-side Loadbalancing inkl. Kommunikation mit dem Eureka Server über den FeignClient und Eureka client out of the box
+// name = "currency-exchange" im @FeignClient Konstruktor kommt aus application.name aus den application.properties des Microservice currency-exchange-service
 @FeignClient(name = "currency-exchange")
 public interface CurrencyConversionProxy {
 
