@@ -14,9 +14,11 @@ import java.util.HashMap;
 public class CurrencyConversionController {
 
     private CurrencyConversionProxy currencyConversionProxy;
+    private RestTemplate restTemplate;
 
-    public CurrencyConversionController(CurrencyConversionProxy currencyConversionProxy) {
+    public CurrencyConversionController(CurrencyConversionProxy currencyConversionProxy, RestTemplate restTemplate) {
         this.currencyConversionProxy = currencyConversionProxy;
+        this.restTemplate = restTemplate;
     }
 
 
@@ -35,7 +37,7 @@ public class CurrencyConversionController {
                 quantity,
                 currencyConversion.getConversionMultiple(),
                 quantity.multiply(currencyConversion.getConversionMultiple()),
-                currencyConversion.getEnvironment()+ " feign"
+                currencyConversion.getEnvironment() + " feign"
         );
     }
 
@@ -49,7 +51,8 @@ public class CurrencyConversionController {
         uriVariables.put("from", from);
         uriVariables.put("to", to);
 
-        ResponseEntity<CurrencyConversion> responseEntity = new RestTemplate().getForEntity(
+        //ResponseEntity<CurrencyConversion> responseEntity = new RestTemplate().getForEntity(
+        ResponseEntity<CurrencyConversion> responseEntity = restTemplate.getForEntity(
                 "http://localhost:8001/currency-exchange/from/{from}/to/{to}",
                 CurrencyConversion.class,
                 uriVariables
@@ -64,7 +67,7 @@ public class CurrencyConversionController {
                 quantity,
                 currencyConversion.getConversionMultiple(),
                 quantity.multiply(currencyConversion.getConversionMultiple()),
-                currencyConversion.getEnvironment()
+                currencyConversion.getEnvironment() + " rest template"
         );
     }
 }
